@@ -1,0 +1,4 @@
+sudo EDITOR=vim visudo -f /etc/sudoers.d/cs316_reboot
+
+Wrote this inside file:
+cs316_devops_user_2 ALL=(ALL) /sbin/reboot, /sbin/shutdown

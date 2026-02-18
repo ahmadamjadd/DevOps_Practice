@@ -1,0 +1,45 @@
+muhammad_ahmad@Victus:~/task4/part2$ apt show nano > ./task4-2.txt
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+muhammad_ahmad@Victus:~/task4/part2$ cat ./task4-2.txt 
+Package: nano
+Version: 7.2-2ubuntu0.1
+Priority: standard
+Section: editors
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jordi Mallach <jordi@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 856 kB
+Depends: libc6 (>= 2.38), libncursesw6 (>= 6), libtinfo6 (>= 6)
+Suggests: hunspell
+Conflicts: pico
+Breaks: nano-tiny (<< 2.8.6-2)
+Replaces: nano-tiny (<< 2.8.6-2), pico
+Homepage: https://www.nano-editor.org/
+Task: standard, ubuntu-wsl
+Download-Size: 282 kB
+APT-Manual-Installed: no
+APT-Sources: http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages
+Description: small, friendly text editor inspired by Pico
+ GNU nano is an easy-to-use text editor originally designed as a replacement
+ for Pico, the ncurses-based editor from the non-free mailer package Pine
+ (itself now available under the Apache License as Alpine).
+ .
+ However, GNU nano also implements many features missing in Pico, including:
+  - undo/redo
+  - line numbering
+  - syntax coloring
+  - soft-wrapping of overlong lines
+  - selecting text by holding Shift
+  - interactive search and replace (with regular expression support)
+  - a go-to line (and column) command
+  - support for multiple file buffers
+  - auto-indentation
+  - tab completion of filenames and search terms
+  - toggling features while running
+  - and full internationalization support
+
+muhammad_ahmad@Victus:~/task4/part2$ 
+

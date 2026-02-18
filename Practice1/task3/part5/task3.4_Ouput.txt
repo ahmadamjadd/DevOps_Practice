@@ -1,0 +1,135 @@
+#Running .sh file provided in the assignment
+
+muhammad_ahmad@Victus:~/task3-4$ source ./creating-files.sh 
+10+0 records in
+10+0 records out
+10240 bytes (10 kB, 10 KiB) copied, 0.000150469 s, 68.1 MB/s
+100+0 records in
+100+0 records out
+102400 bytes (102 kB, 100 KiB) copied, 0.000511479 s, 200 MB/s
+1000+0 records in
+1000+0 records out
+1024000 bytes (1.0 MB, 1000 KiB) copied, 0.00633719 s, 162 MB/s
+50+0 records in
+50+0 records out
+51200 bytes (51 kB, 50 KiB) copied, 0.000299535 s, 171 MB/s
+200+0 records in
+200+0 records out
+204800 bytes (205 kB, 200 KiB) copied, 0.000646153 s, 317 MB/s
+500+0 records in
+500+0 records out
+512000 bytes (512 kB, 500 KiB) copied, 0.00149169 s, 343 MB/s
+5+0 records in
+5+0 records out
+5120 bytes (5.1 kB, 5.0 KiB) copied, 7.3078e-05 s, 70.1 MB/s
+50+0 records in
+50+0 records out
+51200 bytes (51 kB, 50 KiB) copied, 0.000238231 s, 215 MB/s
+200+0 records in
+200+0 records out
+204800 bytes (205 kB, 200 KiB) copied, 0.00112437 s, 182 MB/s
+muhammad_ahmad@Victus:~/task3-4$ 
+
+
+#part a
+muhammad_ahmad@Victus:~/task3-4$ tar -cvzf backup.tar.gz .
+./
+./file4.txt
+./file16.txt
+./file20.txt
+./medium_file3.txt
+./small_file3.txt
+./file1.txt
+./file5.txt
+./small_file2.txt
+./file2.txt
+./large_file2.txt
+./file12.txt
+./file25.txt
+./file23.txt
+./file19.txt
+./file14.txt
+./large_file1.txt
+./file26.txt
+./file3.txt
+./file9.txt
+./file24.txt
+./creating-files.sh
+./file22.txt
+./file17.txt
+./medium_file1.txt
+./file13.txt
+./file8.txt
+./file7.txt
+./file11.txt
+./file21.txt
+./small_file1.txt
+./large_file3.txt
+./file15.txt
+./medium_file2.txt
+./file6.txt
+./file10.txt
+./file18.txt
+tar: .: file changed as we read it
+
+
+#part b:
+muhammad_ahmad@Victus:~/task3-4$ find . -type f ! -name "backup.tar.gz" -delete
+muhammad_ahmad@Victus:~/task3-4$ ls
+backup.tar.gz
+muhammad_ahmad@Victus:~/task3-4$ tar -xzf backup.tar.gz 
+muhammad_ahmad@Victus:~/task3-4$ 
+
+
+#partc
+
+muhammad_ahmad@Victus:~/task3-4$ find . -mtime -90
+.
+./file4.txt
+./file16.txt
+./medium_file3.txt
+./small_file3.txt
+./file1.txt
+./backup.tar.gz
+./file5.txt
+./file2.txt
+./file12.txt
+./file3.txt
+./creating-files.sh
+./file17.txt
+./medium_file1.txt
+./file13.txt
+./file7.txt
+./file11.txt
+./small_file1.txt
+./file6.txt
+
+
+muhammad_ahmad@Victus:~/task3-4$ find . -size +100k
+./large_file2.txt
+./large_file1.txt
+./large_file3.txt
+./medium_file2.txt
+muhammad_ahmad@Victus:~/task3-4$ 
+
+
+muhammad_ahmad@Victus:~/task3-4$ find . -name "*3*"
+./medium_file3.txt
+./small_file3.txt
+./file23.txt
+./file3.txt
+./file13.txt
+./large_file3.txt
+muhammad_ahmad@Victus:~/task3-4$ 
+
+
+muhammad_ahmad@Victus:~/task3-4$ find . -size +100k -mtime +60 -delete
+muhammad_ahmad@Victus:~/task3-4$ 
+
+
+muhammad_ahmad@Victus:~/task3-4$ find . -mtime -10 -delete
+muhammad_ahmad@Victus:~/task3-4$ 
+
+muhammad_ahmad@Victus:~/task3-4$ find . -mtime +120 -size -1k -delete
+muhammad_ahmad@Victus:~/task3-4$ 
+

@@ -1,0 +1,7 @@
+Listing...
+code/stable 1.109.3-1770920364 amd64 [upgradable from: 1.109.2-1770755809]
+cursor/unknown 2.4.37-1770939190 amd64 [upgradable from: 2.4.31-1770537574]
+google-chrome-stable/stable 145.0.7632.75-1 amd64 [upgradable from: 145.0.7632.45-1]
+libpng16-16t64/noble-updates,noble-security 1.6.43-5ubuntu0.5 amd64 [upgradable from: 1.6.43-5ubuntu0.4]
+libpng16-16t64/noble-updates,noble-security 1.6.43-5ubuntu0.5 i386 [upgradable from: 1.6.43-5ubuntu0.4]
+terraform/noble 1.14.5-1 amd64 [upgradable from: 1.14.4-1]

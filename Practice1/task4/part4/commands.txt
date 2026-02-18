@@ -1,0 +1,36 @@
+#part a
+apt search apache
+sudo apt install apache2 -y
+
+#part b
+sudo apt install php libapache2-mod-php
+php --version #to confirm whether version is correct
+sudo apt install php-mysql
+
+
+#part c
+sudo apt install mysql-server
+sudo mysql_secure_installation
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+FLUSH PRIVILEGES;
+exit;
+
+
+#part d
+apache2ctl -S
+
+#part e
+sudo cp ~/Downloads/adminer-5.4.2-mysql.php /var/www/html/adminer.php
+
+part g:
+unzip ~/Downloads/wordpress-6.9.1.zip 
+
+part h:
+sudo mv ./wordpress/* /var/www/html/
+
+part i:
+sudo rm /var/www/html/index.html
+sudo chown -R www-data:www-data /var/www/html/
+
+

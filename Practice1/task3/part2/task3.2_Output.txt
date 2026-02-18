@@ -1,0 +1,95 @@
+#Checking whether group ownership changed 
+muhammad_ahmad@Victus:/$ ls -l
+total 4194428
+drwxr-xr-x   2 root root       4096 Jul 24  2025 backend
+lrwxrwxrwx   1 root root          7 Apr 22  2024 bin -> usr/bin
+drwxr-xr-x   2 root root       4096 Feb 26  2024 bin.usr-is-merged
+drwxr-xr-x   4 root root       4096 Feb 11 19:31 boot
+drwxr-xr-x   2 root root       4096 Jan  1  1970 cdrom
+drwxr-xr-x  22 root root       5000 Feb 15 12:01 dev
+drwxr-xr-x 160 root root      12288 Feb 15 13:43 etc
+drwxrwx---   2 root fcse       4096 Feb 15 15:22 fcse
+drwxrwx---   2 root fcve       4096 Feb 15 15:22 fcve
+drwxrwx---   2 root fee        4096 Feb 15 15:22 fee
+drwxrwx---   2 root fes        4096 Feb 15 15:22 fes
+drwxrwx---   2 root fme        4096 Feb 15 15:22 fme
+drwxr-xr-x   8 root root       4096 Feb 15 12:49 home
+lrwxrwxrwx   1 root root          7 Apr 22  2024 lib -> usr/lib
+lrwxrwxrwx   1 root root          9 Apr 22  2024 lib64 -> usr/lib64
+drwxr-xr-x   2 root root       4096 Apr  8  2024 lib.usr-is-merged
+drwx------   2 root root      16384 Jul  5  2025 lost+found
+drwxr-xr-x   3 root root       4096 Jul  5  2025 media
+drwxr-xr-x   2 root root       4096 Feb 15  2025 mnt
+drwxr-xr-x   5 root root       4096 Feb  6 17:31 opt
+dr-xr-xr-x 463 root root          0 Feb 15 12:01 proc
+drwx------  10 root root       4096 Feb 15 14:36 root
+drwxr-xr-x  43 root root       1280 Feb 15 14:37 run
+lrwxrwxrwx   1 root root          8 Apr 22  2024 sbin -> usr/sbin
+drwxr-xr-x   2 root root       4096 Mar 31  2024 sbin.usr-is-merged
+drwxr-xr-x  18 root root       4096 Feb  9 02:44 snap
+drwxr-xr-x   2 root root       4096 Feb 15  2025 srv
+-rw-------   1 root root 4294967296 Jul  5  2025 swap.img
+dr-xr-xr-x  13 root root          0 Feb 15 15:33 sys
+drwxrwxrwt  21 root root      12288 Feb 15 15:44 tmp
+drwxr-xr-x  15 root root       4096 Dec  4 15:25 usr
+drwxr-xr-x  14 root root       4096 Dec  4 20:23 var
+
+
+
+
+#part a
+
+muhammad_ahmad@Victus:/$ getfacl fee fes fme fcve
+# file: fee
+# owner: root
+# group: fee
+user::rwx
+group::rwx
+group:fcse:r-x
+mask::rwx
+other::---
+
+# file: fes
+# owner: root
+# group: fes
+user::rwx
+group::rwx
+group:fcse:r-x
+mask::rwx
+other::---
+
+# file: fme
+# owner: root
+# group: fme
+user::rwx
+group::rwx
+group:fcse:r-x
+mask::rwx
+other::---
+
+# file: fcve
+# owner: root
+# group: fcve
+user::rwx
+group::rwx
+group:fcse:r-x
+mask::rwx
+other::---
+
+
+
+
+#part b
+muhammad_ahmad@Victus:/$ getfacl fcve
+# file: fcve
+# owner: root
+# group: fcve
+user::rwx
+user:cs316_devops_user_3:r-x
+group::rwx
+group:fcse:r-x
+mask::rwx
+other::---
+
+muhammad_ahmad@Victus:/$ 
+

@@ -1,0 +1,23 @@
+#As root mode
+
+sudo find /fcse -name "test_file.txt"
+
+Explanation: Executed Successfully! Root can do anything. It ignores all 770 or ACL restrictions. The search was fast and successful without errors.
+
+
+
+
+#As group member
+
+ssh user1
+find /fcse -name "test_file.txt"
+
+Explanation: Since user1 is in the fcse group and the folder is 770, they have r and x access. The search worked perfectly.
+
+
+#As non-group member
+
+ssh user2
+find /fcse -name "test_file.txt"
+
+Explanation: user2 is in the fee group. They have no permissions on /fcse (the "Others" category is 0).

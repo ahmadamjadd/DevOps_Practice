@@ -1,0 +1,35 @@
+#Will paste first few lines of updating/installing etc output:
+
+muhammad_ahmad@Victus:~/task4/part1$ sudo apt update
+[sudo] password for muhammad_ahmad: 
+Hit:1 https://repository.spotify.com stable InRelease                                                                                                                                  
+Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease                                                                                                                                 
+Hit:3 https://pkg.cloudflare.com/cloudflared any InRelease                                                                                                                             
+Err:1 https://repository.spotify.com stable InRelease                                                                                                                                  
+  The following signatures were invalid: EXPKEYSIG C85668DF69375001 Spotify Public Repository Signing Key <tux@spotify.com> The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 5384CE82BA52C83A
+Get:4 https://dl.google.com/linux/chrome/deb stable InRelease [1,825 B]                                                                                                                
+Hit:5 https://packages.microsoft.com/repos/code stable InRelease                                                                                                                       
+Get:6 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]                                                                                                              
+Get:7 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]                                                                                                                
+Hit:8 https://downloads.cursor.com/aptrepo stable InRelease                                                                                                                            
+Get:9 https://apt.releases.hashicorp.com noble InRelease [12.9 kB]                                                                                                                     
+Hit:10 https://deb.packages.mattermost.com stable InRelease  
+
+
+
+muhammad_ahmad@Victus:~/task4/part1$ apt list --upgradable > ./task4-1.txt
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+muhammad_ahmad@Victus:~/task4/part1$ cat ./task4-1.txt 
+Listing...
+code/stable 1.109.3-1770920364 amd64 [upgradable from: 1.109.2-1770755809]
+cursor/unknown 2.4.37-1770939190 amd64 [upgradable from: 2.4.31-1770537574]
+google-chrome-stable/stable 145.0.7632.75-1 amd64 [upgradable from: 145.0.7632.45-1]
+libpng16-16t64/noble-updates,noble-security 1.6.43-5ubuntu0.5 amd64 [upgradable from: 1.6.43-5ubuntu0.4]
+libpng16-16t64/noble-updates,noble-security 1.6.43-5ubuntu0.5 i386 [upgradable from: 1.6.43-5ubuntu0.4]
+terraform/noble 1.14.5-1 amd64 [upgradable from: 1.14.4-1]
+
+
+
+
+
+

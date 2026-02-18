@@ -1,0 +1,15 @@
+sudo chown :fcse /fcse
+sudo chown :fee /fee
+sudo chown :fes /fes
+sudo chown :fme /fme
+sudo chown :fcve /fcve
+
+sudo chmod 770 /fcse /fee /fes /fme /fcve
+
+#part a
+sudo setfacl -m g:fcse:rx /fee /fes /fme /fcve
+
+#part b
+sudo setfacl -m u:cs316_devops_user_3:rx /fcve
+
+

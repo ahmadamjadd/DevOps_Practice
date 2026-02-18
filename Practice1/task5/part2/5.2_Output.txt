@@ -1,0 +1,4 @@
+muhammad_ahmad@Victus:~/task5/part2$ sleep 10 &
+[1] 14233
+muhammad_ahmad@Victus:~/task5/part2$ 
+

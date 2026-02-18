@@ -1,0 +1,2 @@
+sudo usermod -aG sudo cs316_devops_user_1
+

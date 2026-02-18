@@ -1,0 +1,14 @@
+Commands:
+groups cs316_devops_user_1
+groups cs316_devops_user_2
+groups cs316_devops_user_3
+groups cs316_devops_user_4
+groups cs316_devops_user_5
+
+Output:
+cs316_devops_user_1 : cs316_devops_user_1 users fcse
+cs316_devops_user_2 : cs316_devops_user_2 users fee
+cs316_devops_user_3 : cs316_devops_user_3 users fes
+cs316_devops_user_4 : cs316_devops_user_4 users fme
+cs316_devops_user_5 : cs316_devops_user_5 users fcve
+

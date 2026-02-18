@@ -1,0 +1,27 @@
+major minor  #blocks  name
+
+   7        0          4 loop0
+   7        1      56820 loop1
+   7        2      75732 loop2
+   7        3      68452 loop3
+   7        4      56824 loop4
+   7        5      65304 loop5
+   7        6      68456 loop6
+   7        7      75724 loop7
+ 259        0  500107608 nvme0n1
+ 259        1    1100800 nvme0n1p1
+ 259        2  499004416 nvme0n1p2
+   7        9      65304 loop9
+   7       10     168780 loop10
+   7        8     685860 loop8
+   7       14      66008 loop14
+   7       13     404460 loop13
+   7       12     620624 loop12
+   7       11      93888 loop11
+   7       16      90680 loop16
+   7       17       8940 loop17
+   7       18      85460 loop18
+   7       19      49240 loop19
+   7       15       9028 loop15
+   7       20      52148 loop20
+   7       21      86508 loop21

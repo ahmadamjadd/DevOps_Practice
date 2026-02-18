@@ -1,0 +1,3 @@
+ps aux
+ps aux > 5.1_Output.txt
+

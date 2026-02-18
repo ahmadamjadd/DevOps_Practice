@@ -1,0 +1,25 @@
+#Pasting only first few lines
+
+muhammad_ahmad@Victus:~/task4/part3$ sudo apt upgrade nano
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+nano is already the newest version (7.2-2ubuntu0.1).
+nano set to manually installed.
+Calculating upgrade... Done
+The following package was automatically installed and is no longer required:
+  nvidia-firmware-580-580.95.05
+Use 'sudo apt autoremove' to remove it.
+Get more security updates through Ubuntu Pro with 'esm-apps' enabled:
+  vlc-plugin-qt libvlc5 libmagickcore-6.q16-7t64 libzvbi-common vlc-data
+  libvlccore9 vlc imagemagick libavcodec-extra vlc-bin
+  libmagickcore-6.q16-7-extra vlc-l10n libcjson1 libavdevice60 ffmpeg
+  libpostproc57 vlc-plugin-samba libgstreamer-plugins-bad1.0-0 libzvbi0t64
+  libzvbi0t64 libavcodec-extra60 libavcodec-extra60 vlc-plugin-notify
+  libavutil58 libavutil58 imagemagick-6.q16 libswscale7
+  vlc-plugin-access-extra vlc-plugin-skins2 vlc-plugin-video-splitter
+  libswresample4 libswresample4 imagemagick-6-common vlc-plugin-video-output
+  7zip libavformat60 gstreamer1.0-plugins-bad libvlc-bin vlc-plugin-base
+  vlc-plugin-visualization libavfilter9 libmagickwand-6.q16-7t64
+Learn more about Ubuntu Pro at https://ubuntu.com/pro
+

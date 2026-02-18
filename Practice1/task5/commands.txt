@@ -1,0 +1,11 @@
+cat /proc/cpuinfo > /home/muhammad_ahmad/task5/cpuinfo.txt
+cat /proc/meminfo > /home/muhammad_ahmad/task5/meminfo.txt
+uname -a > /home/muhammad_ahmad/task5/sysinfo.txt
+du -sh /home/muhammad_ahmad/Documents/GIKI/Notes/ > /home/muhammad_ahmad/task5/du_info.txt
+df -h > /home/muhammad_ahmad/task4/df_info.txt
+cat /proc/partitions > /home/muhammad_ahmad/task5/partitions.txt
+cat /proc/devices > /home/muhammad_ahmad/task5/devices.txt
+ifconfig > /home/muhammad_ahmad/task5/ifconfig.txt
+cat /etc/fstab > /home/muhammad_ahmad/task5/fstab.txt
+
+

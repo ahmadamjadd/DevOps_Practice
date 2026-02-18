@@ -1,0 +1,9 @@
+Filesystem           Size       Use%      
+tmpfs                1.6G       1%        
+/dev/nvme0n1p2       468G       25%       
+tmpfs                7.7G       1%        
+tmpfs                5.0M       1%        
+efivarfs             256K       67%       
+tmpfs                7.7G       0%        
+/dev/nvme0n1p1       1.1G       1%        
+tmpfs                1.6G       1%        

@@ -1,0 +1,11 @@
+sudo addgroup fcse
+sudo addgroup fee
+sudo addgroup fes
+sudo addgroup fme
+sudo addgroup fcve
+
+sudo adduser cs316_devops_user_1 fcse
+sudo adduser cs316_devops_user_2 fee
+sudo adduser cs316_devops_user_3 fes
+sudo adduser cs316_devops_user_4 fme
+sudo adduser cs316_devops_user_5 fcve

@@ -1,0 +1,1 @@
+df -h | awk 'BEGIN {printf "%-20s %-10s %-10s\n", "Filesystem", "Size", "Use%" } NR>1 {printf "%-20s %-10s %-10s\n", $1, $2, $5}' > ~/task5/part6/2023361_mfsu.txt

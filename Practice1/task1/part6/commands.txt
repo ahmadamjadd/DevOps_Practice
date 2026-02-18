@@ -1,0 +1,60 @@
+sudo vim ~/.ssh/config 
+Host user1
+    HostName 127.0.0.1
+    User cs316_devops_user_1
+    IdentityFile ~/task1/part5/keys/cs316_devops_user_1
+
+Host user2
+    HostName 127.0.0.1
+    User cs316_devops_user_2
+    IdentityFile ~/task1/part5/keys/cs316_devops_user_2
+
+Host user3
+    HostName 127.0.0.1
+    User cs316_devops_user_3
+    IdentityFile ~/task1/part5/keys/cs316_devops_user_3
+
+Host user4
+    HostName 127.0.0.1
+    User cs316_devops_user_4
+    IdentityFile ~/task1/part5/keys/cs316_devops_user_4
+
+Host user5
+    HostName 127.0.0.1
+    User cs316_devops_user_5
+    IdentityFile ~/task1/part5/keys/cs316_devops_user_5
+    
+
+
+Now sending public key to each user
+
+sudo mkdir -p /home/cs316_devops_user_1/.ssh
+cat ~/task1/part5/keys/cs316_devops_user_1.pub | sudo tee /home/cs316_devops_user_1/.ssh/authorized_keys
+sudo chown -R cs316_devops_user_1:cs316_devops_user_1 /home/cs316_devops_user_1/.ssh
+sudo chmod 700 /home/cs316_devops_user_1/.ssh
+sudo chmod 600 /home/cs316_devops_user_1/.ssh/authorized_keys
+
+sudo mkdir -p /home/cs316_devops_user_2/.ssh
+cat ~/task1/part5/keys/cs316_devops_user_2.pub | sudo tee /home/cs316_devops_user_2/.ssh/authorized_keys
+sudo chown -R cs316_devops_user_2:cs316_devops_user_2 /home/cs316_devops_user_2/.ssh
+sudo chmod 700 /home/cs316_devops_user_2/.ssh
+sudo chmod 600 /home/cs316_devops_user_2/.ssh/authorized_keys
+
+sudo mkdir -p /home/cs316_devops_user_3/.ssh
+cat ~/task1/part5/keys/cs316_devops_user_3.pub | sudo tee /home/cs316_devops_user_3/.ssh/authorized_keys
+sudo chown -R cs316_devops_user_3:cs316_devops_user_3 /home/cs316_devops_user_3/.ssh
+sudo chmod 700 /home/cs316_devops_user_3/.ssh
+sudo chmod 600 /home/cs316_devops_user_3/.ssh/authorized_keys
+
+sudo mkdir -p /home/cs316_devops_user_4/.ssh
+cat ~/task1/part5/keys/cs316_devops_user_4.pub | sudo tee /home/cs316_devops_user_4/.ssh/authorized_keys
+sudo chown -R cs316_devops_user_4:cs316_devops_user_4 /home/cs316_devops_user_4/.ssh
+sudo chmod 700 /home/cs316_devops_user_4/.ssh
+sudo chmod 600 /home/cs316_devops_user_4/.ssh/authorized_keys
+
+sudo mkdir -p /home/cs316_devops_user_5/.ssh
+cat ~/task1/part5/keys/cs316_devops_user_5.pub | sudo tee /home/cs316_devops_user_5/.ssh/authorized_keys
+sudo chown -R cs316_devops_user_5:cs316_devops_user_5 /home/cs316_devops_user_5/.ssh
+sudo chmod 700 /home/cs316_devops_user_5/.ssh
+sudo chmod 600 /home/cs316_devops_user_5/.ssh/authorized_keys
+

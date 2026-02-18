@@ -1,0 +1,10 @@
+Command: getent passwd
+
+Output  (last few lines):
+cs316_devops_user_1:x:1001:1001:,,,:/home/cs316_devops_user_1:/bin/bash
+cs316_devops_user_2:x:1002:1002:,,,:/home/cs316_devops_user_2:/bin/bash
+cs316_devops_user_3:x:1003:1003:,,,:/home/cs316_devops_user_3:/bin/bash
+cs316_devops_user_4:x:1004:1004:,,,:/home/cs316_devops_user_4:/bin/bash
+cs316_devops_user_5:x:1005:1005:,,,:/home/cs316_devops_user_5:/bin/bash
+
+

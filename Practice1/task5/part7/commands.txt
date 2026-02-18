@@ -1,0 +1,2 @@
+free -h > 5.7_Output.txt
+

@@ -1,0 +1,8 @@
+sudo vim /etc/ssh/sshd_config
+
+Changing Ports as seen in screenshot attached in folder
+
+sudo systemctl restart ssh
+
+sudo systemctl status ssh
+

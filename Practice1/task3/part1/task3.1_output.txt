@@ -1,0 +1,10 @@
+#Seeing Created files
+
+ls /
+
+backend  bin.usr-is-merged  cdrom  etc   fcve  fes  home  lib64              lost+found  mnt  proc  run   sbin.usr-is-merged  srv       sys  usr
+bin      boot               dev    fcse  fee   fme  lib   lib.usr-is-merged  media       opt  root  sbin  snap                swap.img  tmp  var
+
+
+
+

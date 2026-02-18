@@ -1,0 +1,20 @@
+mkdir -p ~/task3-4
+cd ~/task3-4
+
+source ./creating-files.sh 
+
+#part a
+tar -cvzf backup.tar.gz .
+
+#part b
+find . -type f ! -name "backup.tar.gz" -delete
+tar -xzf backup.tar.gz 
+
+#part c 
+find . -mtime -90
+find . -size +100k
+find . -name "*3*"
+find . -size +100k -mtime +60 -delete
+find . -mtime -10 -delete
+find . -mtime +120 -size -1k -delete
+

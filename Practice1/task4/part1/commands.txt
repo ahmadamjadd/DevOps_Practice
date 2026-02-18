@@ -1,0 +1,4 @@
+sudo apt update
+apt list --upgradable > ./task4-1.txt
+
+

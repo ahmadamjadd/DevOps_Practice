@@ -1,0 +1,6 @@
+sudo adduser cs316_devops_user_1
+sudo adduser cs316_devops_user_2 --gecos ""
+sudo adduser cs316_devops_user_3 --gecos ""
+sudo adduser cs316_devops_user_4 --gecos ""
+sudo adduser cs316_devops_user_5 --gecos ""
+
