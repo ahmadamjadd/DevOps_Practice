@@ -1,0 +1,21 @@
+Observation: How Permissions Impact File Creation
+
+1. Successful File Creation (user1 in /fcse):
+   - Command: touch /fcse/file_by_fcse.txt
+   - Result: Success
+   - Explanation: Because the directory is 770 and user1 is in the fcse group, they have the w permission needed to create files. File creation was successful only when the user was a member of the group owning the directory with rwx permissions.
+
+2. Unsuccessful File Creation (user1 in /fee via ACL):
+   - Command: touch /fee/intruder.txt
+   - Result: Permission Denied
+   - Explanation: Even though the ACL lets fcse see and enter /fee (rx), it does not grant Write (w) permission. Users granted access via ACLs (like fcse users in /fee) could list and enter directories but could not create files because the ACL only granted rx (Read/Execute), not w (Write).
+
+3. Unsuccessful File Creation (user2 in /fcse):
+   - Command: touch /fcse/fee_attempt.txt
+   - Result: Permission Denied
+   - Explanation: Since user2 is not in the fcse group and has no ACL, the "0" (Others) in the 770 setup blocks them completely.
+
+Key Observations:
+- Group Ownership: File creation was successful only when the user was a member of the group owning the directory with rwx permissions.
+- ACL Limitations: Users granted access via ACLs could list and enter directories but could not create files because the ACL only granted rx (Read/Execute), not w (Write).
+- Others Permission: Users not in the group and without ACL access are completely blocked by the "0" others permission.

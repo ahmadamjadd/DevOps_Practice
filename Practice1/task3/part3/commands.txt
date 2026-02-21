@@ -1,24 +1,11 @@
-#Success Command 1:
+# Success Command - user1 creating file in /fcse
 ssh user1
 touch /fcse/file_by_fcse.txt
 ls /fcse
 
-Explanation: 
-Because the directory is 770 and user1 is in the fcse group, they have the w permission needed to create files.
-Group Ownership: File creation was successful only when the user was a member of the group owning the directory with rwx permissions.
-
-
-#Unsuccessfull Command 1:
+# Unsuccessful Command - user1 trying to create file in /fee (ACL access only)
 touch /fee/intruder.txt
 
-Explanation: Permission Denied.Even though the ACL lets fcse see and enter /fee (rx), it does not grant Write (w) permission.
-ACL Limitations: Users granted access via ACLs (like fcse users in /fee) could list and enter directories but could not create files because the ACL only granted rx (Read/Execute), not w (Write).
-
-
-#Unsuccessful Command 2:
+# Unsuccessful Command - user2 trying to create file in /fcse
 ssh user2
 touch /fcse/fee_attempt.txt
-
-Explanation: Since user2 is not in the fcse group and has no ACL, the "0" (Others) in your 770 setup blocks them completely.
-
-

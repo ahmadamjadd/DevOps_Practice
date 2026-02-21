@@ -1,0 +1,21 @@
+Observation: Using find Command with Different User Access Levels
+
+1. As Root User:
+   - Command: sudo find /fcse -name "test_file.txt"
+   - Result: Executed Successfully
+   - Explanation: Root can do anything. It ignores all 770 or ACL restrictions. The search was fast and successful without errors.
+
+2. As Group Member (user1 in fcse group):
+   - Command: find /fcse -name "test_file.txt"
+   - Result: Executed Successfully
+   - Explanation: Since user1 is in the fcse group and the folder is 770, they have r and x access. The search worked perfectly.
+
+3. As Non-Group Member (user2 in fee group):
+   - Command: find /fcse -name "test_file.txt"
+   - Result: Permission Denied
+   - Explanation: user2 is in the fee group. They have no permissions on /fcse (the "Others" category is 0).
+
+Key Observations:
+- Root bypasses all permission checks and can search any directory.
+- Group members with read and execute permissions can successfully search within their group's directory.
+- Non-group members without ACL access cannot search directories where "Others" permission is set to 0.

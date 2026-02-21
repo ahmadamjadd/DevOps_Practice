@@ -1,0 +1,5 @@
+Task 1: Setting Up a Linux Environment
+
+Note: I already had Ubuntu Linux installed natively on my system, so I did not need to set up a virtual machine using VMware Workstation.
+
+All subsequent tasks (Task 2-5) were completed directly on my existing Ubuntu installation.

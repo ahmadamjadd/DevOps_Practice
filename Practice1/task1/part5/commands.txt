@@ -1,9 +1,0 @@
-ssh-keygen -t ed25519 -f ~/task1/part5/keys/cs316_devops_user_1
-ssh-keygen -t ed25519 -f ~/task1/part5/keys/cs316_devops_user_2
-ssh-keygen -t ed25519 -f ~/task1/part5/keys/cs316_devops_user_3
-ssh-keygen -t ed25519 -f ~/task1/part5/keys/cs316_devops_user_4
-ssh-keygen -t ed25519 -f ~/task1/part5/keys/cs316_devops_user_5
-
-
-
-

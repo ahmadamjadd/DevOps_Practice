@@ -1,0 +1,2 @@
+cat CS316_A1.pub >> ~/.ssh/authorized_keys
+cat ~/.ssh/authorized_keys
