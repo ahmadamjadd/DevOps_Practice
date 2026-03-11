@@ -1,0 +1,3 @@
+Hello, I am Muhammad Ahmad Amjad
+ Im making this file using echo yayyyyyy
+Appending this line
