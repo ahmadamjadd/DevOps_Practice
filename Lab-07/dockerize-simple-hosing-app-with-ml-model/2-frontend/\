@@ -1,0 +1,6 @@
+FROM nginx:1.29.0
+EXPOSE 80
+WORKDIR /app
+COPY ./src/ .
+ENV API_URL=http://192.168.65.91:5000
+

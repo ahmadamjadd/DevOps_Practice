@@ -1,0 +1,10 @@
+version: "3"
+services:
+  db:
+    image: mariadb
+    environment:
+      - MARIADB_ROOT_PASSWORD=test
+  dbclient:
+    image: phpmyadmin
+    ports:
+     - 82:80

@@ -1,0 +1,18 @@
+version: '3'
+services:
+  devops_mariadb:
+    image: mariadb
+    environment:
+      - MARIADB_USER=test
+      - MARIADB_PASSWORD=test
+      - MARIADB_ROOT_PASSWORD=test
+    volumes:
+      - /var/docker-containers-volume/mysql:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 83:80
+    links:
+      - devops_mariadb:db
+    depends_on:
+      - devops_mariadb

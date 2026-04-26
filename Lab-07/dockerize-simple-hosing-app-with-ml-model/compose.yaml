@@ -1,0 +1,32 @@
+services:
+  app-frontend:
+    build: ./2-frontend/
+    ports:
+      - "8001:80"
+    environment:
+      - API_URL=http://localhost:5000
+    volumes:
+      - ./2-frontend/nginx.template.conf:/etc/nginx/templates/default.conf.template
+    networks:
+      - app
+
+  app-backend:
+    build: ./3-backend/
+    ports:
+      - "5000:80"
+    environment:
+      - MODEL_API_BASE_URL=http://ai-model-service
+    networks:
+      - app
+
+  ai-model-service:
+    build: ./4-ai-model-service/
+    environment:
+      - MODEL_FILENAME=house_price_prediction_model.joblib
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
+

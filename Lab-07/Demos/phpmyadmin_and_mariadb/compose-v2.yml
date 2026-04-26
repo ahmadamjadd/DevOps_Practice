@@ -1,0 +1,13 @@
+version: '3'
+services:
+  devops_mariadb:
+    image: mariadb
+    container_name: db
+    environment:
+      - MARIADB_USER=test
+      - MARIADB_PASSWORD=test
+      - MARIADB_ROOT_PASSWORD=test
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 83:80
