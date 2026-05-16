@@ -1,8 +1,5 @@
 #! /usr/bin/bash
 
-# Q6: Build a system health report and host it as nginx index.html.
-
-# Capture current date for console and HTML report.
 curr_date="$(date +"%A, %b %Y")"
 echo -e "$curr_date\n"
 
@@ -19,7 +16,6 @@ avai_mem=$(free | awk '/Mem:/ { printf("%.2f", ($4/$2)*100) }')
 avai_swap=$(free | awk '/Swap:/ { printf("%.2f", ($4/$2)*100) }')
 echo -e "Available Mem: ${avai_mem}%, Available Swap: ${avai_swap}%"
 
-# Disk summary: total/used/available and per-partition details (excluding tmpfs).
 t_disk=$(df -h --total | awk '/total/ { printf($2) }')
 t_disk_used=$(df -h --total | awk '/total/ { printf($3) }')
 t_disk_avail=$(df -h --total | awk '/total/ { printf($4) }')
@@ -35,7 +31,6 @@ df -h --exclude="tmpfs" | tail -n +2 | while read -r line; do
     echo "--------------------------"
 done
 
-# Generate report using heredoc as required.
 cat <<EOF > system_health.html
 <!DOCTYPE html>
 <html>
@@ -78,10 +73,8 @@ $(df -h --exclude="tmpfs" | tail -n +2 | awk '{print "        <tr><td>"$1"</td><
 </html>
 EOF
 
-# Deploy the generated report to nginx default web root.
 sudo cp system_health.html /var/www/html/index.html
 
-# Print result status and exit with code 1 on failure.
 if [ $? -eq 0 ]; then
     echo "Success: System health report hosted successfully."
 else

@@ -7,9 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  # ==========================================
-  # 1. FRONTEND TESTING
-  # ==========================================
   frontend_tests:
     runs-on: ubuntu-latest
     steps:
@@ -25,9 +22,6 @@ jobs:
           npm run lint
           npm run test
 
-  # ==========================================
-  # 2. BACKEND TESTING
-  # ==========================================
   backend_tests:
     runs-on: ubuntu-latest
     steps:
@@ -39,9 +33,6 @@ jobs:
           flake8 .
           pytest
 
-  # ==========================================
-  # 3. NOTIFY DEV ON FAILURE
-  # ==========================================
   notify_dev_failure:
     needs: [frontend_tests, backend_tests]
     if: failure() # Triggers if EITHER test job fails
@@ -61,9 +52,6 @@ jobs:
             The workflow failed during the testing phase (either Frontend or Backend).
             Check the logs here: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-  # ==========================================
-  # 4. BUILD FRONTEND ARTIFACT
-  # ==========================================
   build_frontend:
     needs: [frontend_tests, backend_tests]
     runs-on: ubuntu-latest
@@ -78,17 +66,14 @@ jobs:
         run: |
           npm ci
           npm run build
-        env: 
+        env:
           VITE_API_URL: http://${{ vars.TESTING_INSTANCE_IP }}:8000/workouts/
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: react-build
-          path: ./frontend/dist/ # Change to ./frontend/build/ if using Create React App
+          path: ./frontend/dist/
 
-  # ==========================================
-  # 5. DEPLOY FRONTEND & BACKEND
-  # ==========================================
   deploy:
     needs: build_frontend
     runs-on: ubuntu-latest

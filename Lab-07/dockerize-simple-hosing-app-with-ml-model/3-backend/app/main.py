@@ -4,7 +4,6 @@ from data import houses
 import requests
 import os
 
-# Load trained model
 MODEL_FILENAME = os.getenv("MODEL_FILENAME", "house_price_model.joblib")
 
 app = FastAPI()
@@ -39,7 +38,6 @@ def get_house(house_id: int):
 async def predict(request: Request):
     data = await request.json()
 
-    # Forward request to ML model service
     response = requests.post(MODEL_API_BASE_URL+"/predict", json=data)
 
     if response.status_code == 200:

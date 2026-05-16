@@ -7,9 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  # ==========================================
-  # JOB 1: BACKEND TESTING
-  # ==========================================
   test-backend:
     runs-on: ubuntu-latest
     services:
@@ -41,9 +38,6 @@ jobs:
       - name: Run Backend Unit Tests
         run: pytest backend/test_main.py
 
-  # ==========================================
-  # JOB 2: FRONTEND TESTING
-  # ==========================================
   test-frontend:
     runs-on: ubuntu-latest
     steps:
@@ -66,9 +60,6 @@ jobs:
         working-directory: ./frontend
         run: npm run test
 
-  # ==========================================
-  # JOB 3: FAILURE NOTIFICATION (Triggers if tests break)
-  # ==========================================
   notify-failure:
     needs: [test-backend, test-frontend]
     if: ${{ always() && contains(needs.*.result, 'failure') }}
@@ -86,9 +77,6 @@ jobs:
           from: GitHub Actions
           body: "The workflow stopped because the unit tests or linting failed. The images were NOT built and the EC2 instance was NOT updated. Check logs: https://github.com/${{ github.repository }}/actions"
 
-  # ==========================================
-  # JOB 4: BUILD, PUSH, AND DEPLOY
-  # ==========================================
   build-and-deploy:
     needs: [test-backend, test-frontend]
     runs-on: ubuntu-latest

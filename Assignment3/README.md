@@ -1,4 +1,4 @@
-# DOMjudge Deployment — Assignment 3
+# DOMjudge Deployment
 
 This repository demonstrates two approaches for deploying DOMjudge in containers:
 

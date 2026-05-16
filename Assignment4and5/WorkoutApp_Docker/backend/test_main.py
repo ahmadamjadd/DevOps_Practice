@@ -3,13 +3,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
 
-# Make sure the app module builds its default engine against SQLite.
 os.environ["DATABASE_URL"] = "sqlite:///./test.db"
 
-from main import Base, app, get_db  # noqa: E402
-
-# --- TEST DATABASE SETUP ---
-# We use a separate SQLite database for testing.
+from main import Base, app, get_db
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,

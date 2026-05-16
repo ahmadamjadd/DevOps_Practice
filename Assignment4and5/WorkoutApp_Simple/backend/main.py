@@ -5,14 +5,11 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 import datetime
 
-# --- Database Setup ---
-# Using SQLite for local development. Easy to swap to Postgres later.
 SQLALCHEMY_DATABASE_URL = "sqlite:///./workouts.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-# --- SQLAlchemy Model (Database Table) ---
 class Workout(Base):
     __tablename__ = "workouts"
     id = Column(Integer, primary_key=True, index=True)
@@ -22,10 +19,8 @@ class Workout(Base):
     reps = Column(Integer)
     weight = Column(Float)
 
-# Create the database table
 Base.metadata.create_all(bind=engine)
 
-# --- Pydantic Schemas (Data Validation) ---
 class WorkoutCreate(BaseModel):
     exercise_name: str
     sets: int
@@ -39,7 +34,6 @@ class WorkoutResponse(WorkoutCreate):
     class Config:
         from_attributes = True
 
-# --- FastAPI App Initialization ---
 app = FastAPI(title="Workout Tracker API")
 
 # Enable CORS so your future React frontend can communicate with this API

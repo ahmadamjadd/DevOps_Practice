@@ -5,11 +5,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Set default Python alias
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # Set working directory inside the container
 WORKDIR /app
 
-# Default command to run Python
 CMD ["python"]

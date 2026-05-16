@@ -1,22 +1,13 @@
 #!/bin/bash
 
-# ==========================================
-# 7a. Setup Log File
-# ==========================================
 LOG_FILE="lamp-setup-2023361.log"
 
-# ==========================================
-# 7b & 7c. Custom Logging Function 
-# ==========================================
 log() {
     local timestamp=$(date +'%Y-%m-%d %H:%M:%S')
     local message="$1"
     echo "[$timestamp] $message" | tee -a "$LOG_FILE"
 }
 
-# ==========================================
-# 2. Command Line Options Parsing
-# ==========================================
 ACTION=""
 WEBSERVER="Apache" 
 
@@ -41,9 +32,6 @@ fi
 
 log "Start of script execution."
 
-# ==========================================
-# 3, 4, & 5. INSTALLATION LOGIC (-i)
-# ==========================================
 if [[ "$ACTION" == "install" ]]; then
     
     PREV_SERVER=""
@@ -89,7 +77,6 @@ if [[ "$ACTION" == "install" ]]; then
         fi
     fi
 
-    # --- 4. PHP Installation ---
     if [[ "${WEBSERVER,,}" == "nginx" ]]; then PHP_CHECK="php-fpm"; else PHP_CHECK="libapache2-mod-php"; fi
 
     if apt list --installed 2>/dev/null | grep -q "^$PHP_CHECK"; then
@@ -123,7 +110,6 @@ EOF
         log "PHP installed successfully."
     fi
 
-    # --- 5. MySQL Installation ---
     if apt list --installed 2>/dev/null | grep -q "^mysql-server"; then
         log "WARNING: MySQL already installed. Skipping."
     else
@@ -139,7 +125,6 @@ EOF
         fi
     fi
 
-    # --- 6. Create Test Page ---
     log "Creating index.php test page..."
     [ -f /var/www/html/index.html ] && mv /var/www/html/index.html /var/www/html/index.html.bak
     cat << 'EOF' > /var/www/html/index.php
@@ -148,9 +133,6 @@ EOF
     chown -R www-data:www-data /var/www/html/
     log "index.php created."
 
-# ==========================================
-# 6. DELETION LOGIC (-d)
-# ==========================================
 elif [[ "$ACTION" == "delete" ]]; then
     
     echo "================================================================="

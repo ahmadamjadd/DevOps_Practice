@@ -3,7 +3,6 @@
 curr_date="$(date +"%A, %b %Y")"
 echo -e "$curr_date\n"
 
-#Memory Portion
 total_mem=$(free -h | awk 'NR==2 { print $2 }')
 swap_mem=$(free -h | awk '/Swap:/ { print $2 }')
 echo -e "Total Memory: $total_mem, Swap Memory: swap_mem\n"
@@ -16,7 +15,6 @@ avai_mem=$(free | awk '/Mem:/ { printf("%.2f", ($4/$2)*100) }')
 avai_swap=$(free | awk '/Swap:/ { printf("%.2f", ($4/$2)*100) }')
 echo -e "Available Mem: ${avai_mem}%, Available Swap: ${avai_swap}%"
 
-#Disk Portion
 t_disk=$(df -h --total | awk '/total/ { printf($2) }')
 t_disk_used=$(df -h --total | awk '/total/ { printf($3) }')
 t_disk_avail=$(df -h --total | awk '/total/ { printf($4) }')
