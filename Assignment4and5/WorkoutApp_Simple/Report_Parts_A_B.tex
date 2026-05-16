@@ -1,0 +1,199 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{CS316 - DevOps Assignment 4 \& 5}
+\lhead{Workout Tracker Application}
+\cfoot{\thepage}
+
+\title{\textbf{Workout Tracker Application} \\
+        \Large Deployment and DevOps Implementation Report}
+\author{Muhammad Ahmad}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% ==================== PART A: INTRODUCTION ====================
+\section{Introduction}
+
+\subsection{Project Overview}
+The \textbf{Minimalist Workout Tracker} is a multi-tier web application developed to demonstrate a complete DevOps workflow and CI/CD implementation. This project encompasses a full-stack application designed to log and view daily gym routines with a clean, user-friendly interface.
+
+\subsubsection{Technology Stack}
+\begin{itemize}
+    \item \textbf{Frontend:} React.js (Vite build tool) for fast development and optimized production builds
+    \item \textbf{Backend:} Python FastAPI for high-performance REST API development
+    \item \textbf{Database:} SQLite with SQLAlchemy ORM for data persistence
+    \item \textbf{API Communication:} Axios for seamless frontend-backend communication
+    \item \textbf{Deployment Infrastructure:} AWS EC2 instance on Ubuntu 24.04 LTS
+    \item \textbf{CI/CD Platform:} GitHub Actions for automated workflows
+    \item \textbf{Process Manager:} PM2 for backend process management
+\end{itemize}
+
+\subsection{Assignment Objective}
+
+The primary objectives of this DevOps assignment (Assignment 4 \& 5) were:
+
+\begin{enumerate}
+    \item \textbf{Automated Deployment Pipeline:} Design and implement a complete CI/CD pipeline using GitHub Actions that automatically builds, tests, and deploys the application whenever code is pushed to the main branch.
+    
+    \item \textbf{Infrastructure Setup:} Configure and manage AWS EC2 instances as the staging environment for hosting both frontend (React application) and backend (FastAPI server).
+    
+    \item \textbf{Workflow Orchestration:} Create modular workflows including:
+    \begin{itemize}
+        \item Frontend build and artifact generation
+        \item Artifact transfer to EC2 via SCP
+        \item Backend deployment and dependency installation
+        \item Automated notifications on success/failure
+    \end{itemize}
+    
+    \item \textbf{Process Management:} Implement persistent process management for the backend server to ensure it continues running even after terminal sessions are closed.
+    
+    \item \textbf{Security Implementation:} Configure GitHub Secrets for secure credential management and implement proper security group rules for EC2 network access.
+    
+    \item \textbf{Documentation and Reporting:} Document the complete deployment process, challenges encountered, and solutions implemented.
+\end{enumerate}
+
+\subsection{Application Functionality}
+
+The Workout Tracker application provides users with the ability to:
+\begin{itemize}
+    \item Log daily workout routines with exercise details
+    \item View historical workout records
+    \item Track fitness progress over time
+    \item Interact with a responsive React frontend
+    \item Communicate with a robust FastAPI backend
+\end{itemize}
+
+This application serves as a practical foundation for understanding multi-tier application deployment, scaling considerations, and DevOps best practices in a real-world scenario.
+
+\newpage
+
+% ==================== PART B: CHALLENGES ====================
+\section{Challenges Faced During Deployment}
+
+\textbf{Challenge 1: Environment Mismatch (PEP 668)}
+
+Deploying on Ubuntu 24.04 LTS introduced strict Python packaging rules (PEP 668), which prevents installation of Python packages in the global site-packages directory without using a virtual environment. The deployment workflow failed when attempting to install backend dependencies using \texttt{pip install -r requirements.txt}. This resulted in errors preventing the backend from starting properly on the EC2 instance. Resolved by utilizing the \texttt{--break-system-packages} flag to allow pip to install packages globally:
+
+\begin{lstlisting}[language=bash, caption=Fixed dependency installation]
+pip install -r requirements.txt --break-system-packages
+\end{lstlisting}
+
+\vspace{0.3cm}
+
+\textbf{Challenge 2: Node.js Version Incompatibility}
+
+The frontend build required Node.js 22 or later, but the default Ubuntu repositories only provided Node.js 18, causing dependency resolution failures during the GitHub Actions build phase. Resolved by adding the NodeSource repository:
+
+\begin{lstlisting}[language=bash, caption=Setup Node.js 22]
+curl -sL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt-get install -y nodejs
+\end{lstlisting}
+
+\vspace{0.3cm}
+
+\textbf{Challenge 3: Persistent Backend Process Management}
+
+The backend FastAPI application was started using \texttt{uvicorn} directly in terminal sessions. When SSH connections were closed, the backend process would immediately stop. Implemented PM2 (Process Manager 2) for persistent process management across session disconnections with automatic restart on crashes:
+
+\begin{lstlisting}[language=bash, caption=PM2 backend restart]
+pm2 restart all
+\end{lstlisting}
+
+\vspace{0.3cm}
+
+\textbf{Challenge 4: AWS Security Group Configuration}
+
+Initially, only port 80 was opened in the EC2 security group, allowing frontend access but blocking the backend API on port 8000. Frontend API requests failed with connection timeout errors. Updated the AWS security group rules to allow inbound traffic on:
+\begin{itemize}
+    \item Port 80: HTTP traffic for React frontend
+    \item Port 8000: Backend FastAPI server
+    \item Port 22: SSH for remote administration
+\end{itemize}
+
+Additionally, updated the frontend API URL to use the EC2 instance's public IP:
+
+\begin{lstlisting}[language=bash, caption=Frontend environment variable]
+VITE_API_URL: http://${{ vars.STAGING_EC2_IP }}:8000/workouts/
+\end{lstlisting}
+
+\vspace{0.3cm}
+
+\textbf{Challenge 5: Dynamic EC2 IP Address Changes}
+
+Each time the EC2 instance was stopped and restarted, AWS assigned a new public IP address, causing the frontend's hardcoded API endpoint to become invalid. Transitioned to using GitHub Variables for dynamic IP management by creating \texttt{STAGING\_EC2\_IP} as a GitHub variable and referencing it at build time. Stored the EC2 SSH key as a GitHub Secret (\texttt{STAGING\_EC2\_KEY}) for secure and automated deployments.
+
+\vspace{0.3cm}
+
+\textbf{Challenge 6: API URL Mismatch in Development vs. Production}
+
+During development, the frontend was configured to communicate with localhost backend (\texttt{http://localhost:8000}). When deployed to the staging environment, this configuration needed dynamic updating to point to the EC2 public IP. Implemented environment variable injection during the build process:
+
+\begin{lstlisting}[language=bash, caption=Environment variable during build]
+env:
+  VITE_API_URL: http://${{ vars.STAGING_EC2_IP }}:8000/workouts/
+run: |
+  cd ./frontend
+  npm install
+  npm run build
+\end{lstlisting}
+
+Vite's build system processes these variables, ensuring the correct API endpoint is baked into the production build.
+
+\vspace{0.3cm}
+
+\textbf{Challenge 7: Artifact Transfer and Path Management}
+
+Transferring compiled frontend artifacts from GitHub Actions to the EC2 instance required careful handling of file paths, permissions, and target directories. Configured proper SCP file transfer with explicit source and target directories, proper wildcard patterns for copying, and cleanup of old artifacts before deploying new ones:
+
+\begin{lstlisting}[language=bash, caption=Frontend deployment]
+sudo rm -rf /var/www/html/*
+sudo cp -r /tmp/frontend/react-build/* /var/www/html/
+\end{lstlisting}
+
+\vspace{0.3cm}
+
+\textbf{Challenge 8: GitHub Actions Workflow Notifications and Gmail Authentication}
+
+The deployment process needed feedback on success/failure status. Integrating Gmail SMTP for notifications presented an authentication challenge. Standard Gmail passwords do not work with SMTP due to Gmail's security policies. Generated a Gmail App Password specifically for third-party application access and configured it as a GitHub Secret (\texttt{GMAIL\_PASSWORD}). This approach bypasses Gmail's standard security restrictions while maintaining account security through application-specific passwords. Set up conditional email notifications for both success and failure scenarios, providing immediate feedback on deployment status and facilitating rapid debugging of issues.
+
+
+\end{document}

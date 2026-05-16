@@ -1,0 +1,37 @@
+services:
+  # 1. Database (PostgreSQL) - STAYS EXACTLY THE SAME
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: workout_db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  # 2. Backend (FastAPI) - CHANGES HERE
+  backend:
+    # Notice we removed "build: ./backend" and added the ECR link
+    image: 053108159236.dkr.ecr.ap-south-1.amazonaws.com/workout-backend:testing
+    restart: on-failure
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: workout_db
+      POSTGRES_HOST: db
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+
+  # 3. Frontend (React on Apache) - CHANGES HERE
+  frontend:
+    # We removed "build:" and the "args:" completely!
+    image: 053108159236.dkr.ecr.ap-south-1.amazonaws.com/workout-frontend:testing
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  pg_data:
