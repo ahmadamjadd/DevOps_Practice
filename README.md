@@ -1,7 +1,7 @@
 # DevOps Practical Course — Notes & Exercises
 
 **Overview**
-- This repository contains practical work and exercises for my DevOps practical course (assignments, labs, scripts, containers, IaC, CI/CD and small apps).
+- This repository contains practical work and exercises for my DevOps practical course.
 
 **What I Learned**
 - Docker
