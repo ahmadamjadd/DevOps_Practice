@@ -1,0 +1,56 @@
+name: Fifth Workflow Using GitHub Actions
+
+run-name: >+ 
+          Fifth workflow 
+          ${{ github.actor  }} has triggered this workflow \
+          using ${{ github.event_name }} event \
+          on branch ${{ github.ref  }} of ${{github.repository}} repo.
+on:
+  push:
+    branches:
+      - feature/*
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out to the repository
+        uses: actions/checkout@v4
+      - name: List all the files in the repo branch
+        run: ls -la
+      - name: Printing the contents of a file
+        run: cat firstfile.txt
+  second-fail-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo any text using echo bash command
+        run: echo "Hi class, hope you all had a good mid semester break"
+      - name: Print the contents of ta firstfile
+        run: cat firstfile.txt
+  third-notification-job:
+    runs-on: ubuntu-latest
+    needs: second-fail-job
+    if: always()
+    steps:
+      - name: Send notification about the second job on failure
+        if: ${{ needs.second-fail-job.result == 'failure' }}
+        run: echo "Job failed - Sending notification to the dev or other team members"
+
+      - name: Send notification about the second job on success
+        if: ${{ needs.second-fail-job.result == 'success' }}
+        run: echo "Job succeeded - Sending notification to the dev or other team members"
+
+      - name: Always run this step on second job notifaction
+        if: always()
+        uses: dawidd6/action-send-mail@v6
+        with:
+          server_address: ${{secrets.SMTP_HOST}}
+          server_port: 587
+          secure: false
+          username: ${{secrets.SMTP_USERNAME}}
+          password: ${{secrets.SMTP_PASSWORD}}
+          subject: Github Actions job result
+          to: ${{vars.MAIL_TO_LIST}}
+          from: sajidali - GitHub Action
+          body: >+
+            Build job of ${{github.repository}} completed with result status of ${{needs.second-fail-job.result}}
+            "Find more details on: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

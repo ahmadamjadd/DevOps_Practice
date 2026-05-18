@@ -1,0 +1,15 @@
+services:
+  frontend:
+    image: ${DOCKERHUB_USERNAME}/practice-frontend:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+  backend:
+    image: ${DOCKERHUB_USERNAME}/practice-backend:latest
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - CORS_ORIGIN=http://${EC2_HOST}:8080

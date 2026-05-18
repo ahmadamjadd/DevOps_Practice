@@ -1,0 +1,26 @@
+name: Third Workflow Using GitHub Actions
+
+run-name: >+ 
+          Third workflow
+          ${{ github.actor  }} has triggered this workflow \
+          using ${{ github.event_name }} event \
+          on branch ${{ github.ref  }} of ${{github.repository}} repo.
+on:
+  push:
+    branches:
+      - feature/*
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out to the repository
+        uses: actions/checkout@v4
+      - name: List all the files in the repo branch
+        run: ls -la
+      - name: Printing the contents of a file
+        run: cat firstfile.txt
+  second-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo any text using echo bash command
+        run: echo "Hi class, hope you all had a good mid semester break"

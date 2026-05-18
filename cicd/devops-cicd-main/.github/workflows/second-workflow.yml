@@ -1,0 +1,23 @@
+---
+name: Second Workflow Using GitHub Actions
+
+run-name: ${{ github.actor  }} has triggered this workflow using ${{ github.event_name }} on ${{github.repository}} repo and on branch ${{github.ref_name}}.
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out to the repository
+        uses: actions/checkout@v4
+      - name: Printing the contents of a file
+        run: cat firstfile.txt
+  second-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo any text using echo bash command
+        run: echo "Hi class, hope you all had a good mid semester break"
+...

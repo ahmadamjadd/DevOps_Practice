@@ -1,0 +1,114 @@
+name: CICD Pipeline For Simple React Counter Increment App
+
+run-name: >+
+  CI Pipeline triggered by ${{github.actor}}
+  on event':' ${{github.event_name}}
+  -> branch':' ${{github.ref_name}}
+  for repository':' ${{github.repository}}
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - run: npm install
+
+      - run: npm run lint
+      - run: npm test -- --watchAll=false
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    #env:
+     #DISABLE_ESLINT_PLUGIN: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Installing dependencies 
+        run: npm install
+        
+      - name: Build react app for deploying it in the subdirectoy
+        run: PUBLIC_URL=/cicd-react-demo BUILD_PATH=build-subdirectory npm run build
+
+      - name: Build react app for deploying it at the root level
+        run: PUBLIC_URL=/ BUILD_PATH=build-root npm run build
+
+      - name: Upload build-subdirectory artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build-subdirectory
+          path: build-subdirectory
+          
+      - name: Upload build-root artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build-root
+          path: build-root
+
+  
+  deploy-on-github-pages:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+  
+    permissions:
+      pages: write
+      id-token: write
+  
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: react-build-subdirectory
+          path: build-subdirectory
+  
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build-subdirectory   # uploads the contents of build-subdirectory/
+  
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
+
+  deploy-on-AWS-EC2-Instance:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: ec2-end-url
+      url: ${{ steps.set-url.outputs.page_url }}
+  
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: react-build-root
+          path: build-root
+  
+      - name: Copying the files to the ec2 instacne
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -vzr --delete --omit-dir-times
+          path: ./build-root/*
+          remote_path: /var/www/html/
+          remote_host: ${{vars.EC2_HOST}}
+          remote_user: ${{vars.EC2_USER}}
+          remote_key: ${{ secrets.EC2_PRIVATE_KEY }}
+      - name: Set deployment URL
+        id: set-url
+        run: echo "page_url=http://${{ vars.EC2_HOST }}" >> $GITHUB_OUTPUT

@@ -1,0 +1,56 @@
+services:
+  db:
+    image: mariadb
+    container_name: db
+    volumes:
+      - persistant:/var/lib/mysql
+    environment:
+      - MYSQL_USER=domjudge
+      - MYSQL_PASSWORD=djpw
+      - MYSQL_DATABASE=domjudge
+      - MYSQL_ROOT_PASSWORD=rootpw
+    ports:
+      - "13306:3306"
+    command: ["--max-allowed-packet=64M"]
+    networks:
+      - dom_network
+
+  domserver:
+    image: domjudge/domserver:latest
+    container_name: domserver
+    networks:
+      - dom_network
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=domjudge
+      - MYSQL_DATABASE=domjudge
+      - MYSQL_PASSWORD=djpw
+      - MYSQL_ROOT_PASSWORD=rootpw
+    ports:
+      - "80:80"
+
+  domjudge:
+    image: domjudge/judgehost:latest
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroup: host
+    environment:
+      - DOMSERVER_BASEURL=http://domserver/
+      - JUDGEDAEMON_PASSWORD=password
+    depends_on:
+      domserver:
+        condition: service_healthy
+    networks:
+      - dom_network
+
+
+
+
+networks:
+  dom_network:
+    driver: bridge
+
+volumes:
+  persistant:
+

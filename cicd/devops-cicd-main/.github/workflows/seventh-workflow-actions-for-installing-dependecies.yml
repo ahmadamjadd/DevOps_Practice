@@ -1,0 +1,40 @@
+---
+name: "Seventh workflow with devops class"
+
+run-name: |
+      "Seventh workflow with devops class triggered by ${{github.actor}}
+      with ${{github.event_name}} event
+      on branch ${{github.repository}}"
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out to a repository
+        uses: actions/checkout@v4
+      - name: Printing the content of the file
+        run: cat firstfile.txt
+  second-job:
+    if: ${{ github.event_name == 'workflow_dispatch'  }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Installing php7
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.3"
+      - name: Installing nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: "17"
+      - name: Checking the versions of php and nodejs
+        run: |
+          php --version
+          node --version
+
+...
